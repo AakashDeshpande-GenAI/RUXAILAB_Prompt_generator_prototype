@@ -15,3 +15,6 @@ This project uses **Separation of Concerns**:
 3. Run the pipeline:
    ```bash
    python test_pipeline.py
+## Demo
+![Prompt_generator](https://raw.githubusercontent.com/AakashDeshpande-GenAI/RUXAILAB_Prompt_generator_prototype/refs/heads/main/Images/Prompt_generator_output.png?token=GHSAT0AAAAAADS3LXKUCA3WNOOKCHKQYGEK2NDHIYA)
+![Test_pipeline](https://raw.githubusercontent.com/AakashDeshpande-GenAI/RUXAILAB_Prompt_generator_prototype/refs/heads/main/Images/Test_LLM_output.png?token=GHSAT0AAAAAADS3LXKVL4IBFU7SGEPNYBAU2NDHJSA)
