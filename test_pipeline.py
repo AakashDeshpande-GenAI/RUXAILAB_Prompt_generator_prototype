@@ -1,0 +1,75 @@
+import os
+import google.generativeai as genai
+from dotenv import load_dotenv
+from prompt_generator import PromptGenerator  # Import your generator class
+
+# Load API Key from a .env file (Security Best Practice)
+load_dotenv()
+GENAI_API_KEY = os.getenv("GOOGLE_API_KEY")
+
+class LLMPipeline:
+    def __init__(self):
+        if not GENAI_API_KEY:
+            raise ValueError("API Key not found! Check your .env file.")
+        genai.configure(api_key=GENAI_API_KEY)
+    
+    def parse_prompt(self, full_prompt_text):
+        """
+        Splits your Jinja2 output into 'System Instruction' and 'User Task'.
+        It looks for your specific headers like ### SYSTEM INSTRUCTION ###
+        """
+        parts = full_prompt_text.split("### CONTEXT ###")
+        
+        if len(parts) < 2:
+            return None, full_prompt_text # Fallback: No split found
+            
+        # Extract System Instruction (Remove the header text)
+        system_part = parts[0].replace("### SYSTEM INSTRUCTION ###", "").strip()
+        
+        # The rest is the User Prompt
+        user_part = "### CONTEXT ###" + parts[1] 
+        
+        return system_part, user_part
+
+    def run_test(self, methodology, context_data):
+        # 1. GENERATE (Using your tool)
+        print(f"⚙️  Generating Prompt for: {methodology}...")
+        generator = PromptGenerator()
+        full_text = generator.generate(methodology, context_data)
+        
+        # 2. PARSE (Split System vs User)
+        system_instr, user_msg = self.parse_prompt(full_text)
+        
+        print("\n" + "="*20 + " SYSTEM LAYER " + "="*20)
+        print(system_instr)
+        print("="*54 + "\n")
+
+        # 3. EXECUTE (Send to Gemini)
+        print("🚀 Sending to Gemini 1.5 Flash...")
+        
+        model = genai.GenerativeModel(
+            model_name="gemini-2.5-flash",
+            system_instruction=system_instr # Passing the 'Brain' configuration
+        )
+        
+        response = model.generate_content(user_msg)
+        
+        return response.text
+
+# --- RUN THE TEST ---
+if __name__ == "__main__":
+    # Test Data
+    test_context = {
+        "project_name": "E-Commerce Checkout",
+        "screen_name": "Payment Page",
+        "user_persona": "User with Red-Green Color Blindness",
+        "methodology": "heuristic_evaluation",
+        "focus_area": "Accessibility and Visibility",
+        "screen_description": "The 'Buy Now' button is green on a red background. Error messages appear as red text only."
+    }
+
+    pipeline = LLMPipeline()
+    result = pipeline.run_test("heuristic_evaluation", test_context)
+    
+    print("\n🤖 --- AI ANALYSIS RESULT ---")
+    print(result)

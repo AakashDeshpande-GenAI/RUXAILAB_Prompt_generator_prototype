@@ -1,0 +1,8 @@
+{
+    "project_name": "HealthCare App",
+    "screen_name": "Login Screen",
+    "user_persona": "Elderly patient with poor eyesight",
+    "methodology": "heuristic_evaluation",
+    "focus_area": "Error Prevention",
+    "screen_description": "The login screen has small grey text on a white background. The 'Submit' button is located at the very top left corner."
+}
