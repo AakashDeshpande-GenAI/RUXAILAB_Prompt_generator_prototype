@@ -4,13 +4,18 @@ from jinja2 import Environment, FileSystemLoader
 
 class PromptGenerator:
     def __init__(self, template_folder='templates'):
+        #initialize the template engine
         # 1. Setup the Template Engine (The Machine)
         self.loader = FileSystemLoader(template_folder)
         self.env = Environment(loader=self.loader)
 
-    def generate(self, methodology, input_data):
+    def generate(self, methodology, input_data) -> str:
         """
         Takes the method name and data, returns the string prompt.
+
+        Args : methodology (str): The name of the method/template to use (e.g., "heuristic_evaluation")
+
+        Returns: str: The final prompt ready to be sent to the LLM.
         """
         try:
             # Handle if user types "heuristic_evaluation" or "heuristic_evaluation.j2"
@@ -28,8 +33,7 @@ class PromptGenerator:
 
         except Exception as e:
             return f"Error generating prompt: {str(e)}"
-
-# --- THIS PART RUNS ONLY IF YOU RUN 'python main.py' DIRECTLY ---
+        
 if __name__ == "__main__":
     # Load dummy data for testing
     try:
