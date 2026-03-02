@@ -15,6 +15,17 @@ This project uses **Separation of Concerns**:
 3. Run the pipeline:
    ```bash
    python test_pipeline.py
+
+## 🛡️ Security & Safety Architecture
+This system implements two layers of defense against Prompt Injection:
+Structural Separation: By parsing the prompt into distinct System Instructions (Methodology) and User Content (Context) within the pipeline, we prevent user input from overriding the core UX methodology rules.
+
+Technique: The system prompt includes examples of attempted prompt injections and the desired safe response.
+
+Process: We log all prompts and responses (anonymizing any PII), and use pattern-matching algorithms to flag suspicious interactions. This allows us to analyze attack vectors and continuously improve our prompt architecture and guardrail policies.
+
+Future Guardrails: The official proposal will include an integration with NVIDIA NeMo Guardrails or Llama Guard to sanitize inputs and ensure outputs adhere to RUXAILAB's ethical research guidelines.
+
 ## Demo
 ![Prompt_generator](https://raw.githubusercontent.com/AakashDeshpande-GenAI/RUXAILAB_Prompt_generator_prototype/refs/heads/main/Images/Prompt_generator_output.png)
 ![Test_pipeline](https://raw.githubusercontent.com/AakashDeshpande-GenAI/RUXAILAB_Prompt_generator_prototype/refs/heads/main/Images/Test_LLM_output.png)
