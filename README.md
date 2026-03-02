@@ -20,7 +20,7 @@ This project uses **Separation of Concerns**:
 This system implements two layers of defense against Prompt Injection:
 Structural Separation: By parsing the prompt into distinct System Instructions (Methodology) and User Content (Context) within the pipeline, we prevent user input from overriding the core UX methodology rules.
 
-Technique: The system prompt includes examples of attempted prompt injections and the desired safe response.
+Technique: The system prompt includes examples of attempted prompt injections and the desired safe response. e.g. In-Context Learning with Security Examples (Few-Shot Defense)
 
 Process: We log all prompts and responses (anonymizing any PII), and use pattern-matching algorithms to flag suspicious interactions. This allows us to analyze attack vectors and continuously improve our prompt architecture and guardrail policies.
 
