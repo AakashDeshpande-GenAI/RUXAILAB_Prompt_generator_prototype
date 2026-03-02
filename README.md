@@ -27,5 +27,8 @@ Process: We log all prompts and responses (anonymizing any PII), and use pattern
 Future Guardrails: The official proposal will include an integration with NVIDIA NeMo Guardrails or Llama Guard to sanitize inputs and ensure outputs adhere to RUXAILAB's ethical research guidelines.
 
 ## Demo
+
+Prompt_generator:
 ![Prompt_generator](https://raw.githubusercontent.com/AakashDeshpande-GenAI/RUXAILAB_Prompt_generator_prototype/refs/heads/main/Images/Prompt_generator_output.png)
+Test_pipeline:
 ![Test_pipeline](https://raw.githubusercontent.com/AakashDeshpande-GenAI/RUXAILAB_Prompt_generator_prototype/refs/heads/main/Images/Test_LLM_output.png)
